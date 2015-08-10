@@ -1,0 +1,64 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/arquivos/modelos/decorador.xhtml">
+	<ui:define name="titulo" value="Cadastro de Ambulâncias" />
+
+	<ui:define name="conteudo">
+		<h1>
+			<h:outputText value="#{msgs['ambulancia.titulo']}" />
+		</h1>
+		<br />
+		<h:form>
+			<p:dataTable var="ambulancia"
+				value="#{controladorCadastrarAmbulancia.listagem}"
+				binding="#{controladorCadastrarAmbulancia.datatable}">
+
+				<p:column headerText="#{msgs['crud.id']}">
+					<h:outputText value="#{ambulancia.id}" />
+				</p:column>
+
+				<p:column headerText="#{msgs['ambulancia.id.despacho']}">
+					<h:outputText value="#{ambulancia.despacho.id}" />
+				</p:column>
+
+				<p:column headerText="#{msgs['ambulancia.placa']}">
+					<h:outputText value="#{ambulancia.placa}" />
+				</p:column>
+				<p:column headerText="#{msgs['dados.ligados.titulo']}">
+					<h:outputLink
+						value="#{facesContext.externalContext.requestContextPath}/data/Ambulancia/RDF/#{ambulancia.placa}"
+						target="_blank">
+						<center>
+							<h:outputText value="#{msgs['dados.ligados.rdf.xml']}" />
+						</center>
+					</h:outputLink>
+					<h:outputLink
+						value="#{facesContext.externalContext.requestContextPath}/data/Ambulancia/N-Triple/#{ambulancia.placa}"
+						target="_blank">
+						<h:outputText value="#{msgs['dados.ligados.n.triple']}" />
+					</h:outputLink>
+					<h:outputLink
+						value="#{facesContext.externalContext.requestContextPath}/data/Ambulancia/Turtle/#{ambulancia.placa}"
+						target="_blank">
+						<h:outputText value="#{msgs['dados.ligados.turtle']}" />
+					</h:outputLink>
+				</p:column>
+				<p:column headerText="#{msgs['crud.acao']}">
+					<h:commandButton value="#{msgs['crud.editar']}"
+						action="#{controladorCadastrarAmbulancia.editar}"
+						rendered="#{empty ambulancia.despacho}" />
+					<h:commandButton value="#{msgs['crud.excluir']}"
+						action="#{controladorCadastrarAmbulancia.excluir}"
+						rendered="#{empty ambulancia.despacho}" />
+				</p:column>
+			</p:dataTable>
+			<br />
+			<p:commandButton action="/cadastrarAmbulancia/form.xhtml"
+				value="#{msgs['ambulancia.nova.ambulancia']}" />
+		</h:form>
+	</ui:define>
+</ui:composition>

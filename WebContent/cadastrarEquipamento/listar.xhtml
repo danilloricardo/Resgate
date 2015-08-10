@@ -1,0 +1,43 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/arquivos/modelos/decorador.xhtml">
+	<ui:define name="titulo" value="Cadastro de Equipamento" />
+
+	<ui:define name="conteudo">
+		<h1><h:outputText value="#{msgs['equipamento.titulo']}" /></h1>
+		<br />
+		<h:form>
+			<p:dataTable var="equipamento"
+				value="#{controladorCadastrarEquipamento.listagem}"
+				binding="#{controladorCadastrarEquipamento.datatable}">
+
+				<p:column headerText="#{msgs['crud.id']}">
+					<h:outputText value="#{equipamento.id}" />
+				</p:column>
+
+				<p:column headerText="#{msgs['equipamento.id.ambulancia']}">
+					<h:outputText value="#{equipamento.ambulancia.id}" />
+				</p:column>
+
+				<p:column headerText="#{msgs['equipamento.tipo']}">
+					<h:outputText value="#{equipamento.tipo}" />
+				</p:column>
+
+				<p:column headerText="#{msgs['crud.acao']}">
+						<h:commandButton value="#{msgs['crud.excluir']}"
+						action="#{controladorCadastrarEquipamento.excluir}"
+						rendered="#{empty equipamento.ambulancia}" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+		<br />
+		<p:commandButton action="/cadastrarEquipamento/form.xhtml"
+				value="#{msgs['equipamento.novo.equipamento']}" />
+	</ui:define>
+</ui:composition>

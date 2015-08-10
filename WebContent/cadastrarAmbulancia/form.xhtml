@@ -1,0 +1,33 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/arquivos/modelos/decorador.xhtml">
+	<ui:define name="titulo" value="Cadastro de Ambulâncias" />
+
+	<ui:define name="conteudo">
+		<h1><h:outputText value="#{msgs['ambulancia.titulo']}" /></h1>
+		<br />
+		<h:form name="ambulancia">
+			<p>
+				<p:outputLabel value="#{msgs['crud.id']}: " />
+				<p:inputText value="#{controladorCadastrarAmbulancia.ambulancia.id}"
+					readonly="true" />
+			</p>
+			<p>
+				<p:outputLabel value="#{msgs['ambulancia.placa']}: " />
+				<p:inputText
+					value="#{controladorCadastrarAmbulancia.ambulancia.placa}" />
+			</p>
+
+			<p>
+				<p:commandButton action="#{controladorCadastrarAmbulancia.salvar}"
+					value="#{msgs['btn.ok']}" />
+				<p:commandButton action="/cadastrarAmbulancia/listar.xhtml"
+					value="#{msgs['btn.listar']}" />
+			</p>
+		</h:form>
+	</ui:define>
+</ui:composition>
